@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIPO — Comida Casera de Verdad, Mendoza</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       VARIABLES & RESET
+    ============================================================ */
+    :root {
+      --bg-tiza: #FBF9F6;
+      --terracota-ladrillo: #C85A32;
+      --gris-carbon-fundido: #2C2E31;
+      --terracota-light: #F0E0D8;
+      --gris-suave: #F0EDE9;
+      --gris-medio: #8A8784;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-suave: 0 4px 24px rgba(44, 46, 49, 0.07);
+      --shadow-hover: 0 12px 40px rgba(44, 46, 49, 0.14);
+      --transition: all 0.3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-tiza);
+      font-family: var(--font-sans);
+      color: var(--gris-carbon-fundido);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       TIPOGRAFÍA
+    ============================================================ */
+    h1, h2, h3, .serif { font-family: var(--font-serif); }
+
+    .label-uppercase {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracota-ladrillo);
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #kipo-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(251, 249, 246, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(44, 46, 49, 0.06);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--gris-carbon-fundido);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--terracota-ladrillo);
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gris-carbon-fundido);
+      padding: 0.4rem 0.9rem;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--terracota-ladrillo);
+    }
+
+    .btn-pedir {
+      background-color: var(--gris-carbon-fundido);
+      color: var(--bg-tiza) !important;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      letter-spacing: 0.03em;
+      transition: var(--transition);
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-pedir:hover {
+      background-color: var(--terracota-ladrillo);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(200, 90, 50, 0.28);
+    }
+
+    /* ============================================================
+       BOTONES GLOBALES
+    ============================================================ */
+    .btn-kipo-primary {
+      background-color: var(--gris-carbon-fundido);
+      color: var(--bg-tiza);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.8rem 1.8rem;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-kipo-primary:hover {
+      background-color: var(--terracota-ladrillo);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200, 90, 50, 0.3);
+    }
+
+    .btn-kipo-outline {
+      background: transparent;
+      color: var(--gris-carbon-fundido);
+      border: 2px solid var(--gris-carbon-fundido);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.78rem 1.8rem;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-kipo-outline:hover {
+      background-color: var(--gris-carbon-fundido);
+      color: var(--bg-tiza);
+      transform: translateY(-2px);
+    }
+
+    .btn-kipo-terracota {
+      background-color: var(--terracota-ladrillo);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.65rem 1.4rem;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-kipo-terracota:hover {
+      background-color: #b04e29;
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(200, 90, 50, 0.28);
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    #hero {
+      padding-top: 100px;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-tiza);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative background grain texture */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Large decorative circle */
+    #hero::after {
+      content: '';
+      position: absolute;
+      right: -12vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52vw;
+      height: 52vw;
+      max-width: 700px;
+      max-height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--terracota-light) 0%, transparent 70%);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .hero-kipo-logotype {
+      font-family: var(--font-serif);
+      font-size: clamp(5rem, 16vw, 13rem);
+      line-height: 0.88;
+      color: var(--gris-carbon-fundido);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.2rem, 3.2vw, 2rem);
+      color: var(--terracota-ladrillo);
+      margin-bottom: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--gris-medio);
+      max-width: 440px;
+      line-height: 1.7;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-badge {
+      background: var(--gris-suave);
+      border-radius: 100px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gris-carbon-fundido);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--terracota-ladrillo);
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    /* Hero image placeholder column */
+    .hero-image-col {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-food-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+    }
+
+    .hero-food-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, #E8D5C8 0%, #D4A88A 50%, #C07A56 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-food-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,46,49,0.35) 0%, transparent 55%);
+    }
+
+    .hero-food-label {
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-food-label .plato-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--gris-carbon-fundido);
+    }
+
+    .hero-food-label .plato-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--terracota-ladrillo);
+    }
+
+    /* Floating tag on hero card */
+    .hero-float-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: white;
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--terracota-ladrillo);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      z-index: 2;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    /* ============================================================
+       SECCIÓN PILARES (¿Cómo funciona KIPO?)
+    ============================================================ */
+    #pilares {
+      padding: 6rem 0;
+      background-color: var(--bg-tiza);
+    }
+
+    .pilares-eyebrow {
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .pilares-title {
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 3.5rem;
+      line-height: 1.15;
+    }
+
+    .pilar-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 2.25rem 1.75rem;
+      height: 100%;
+      box-shadow: var(--shadow-suave);
+      transition: var(--transition);
+      border: 1px solid rgba(44,46,49,0.05);
+    }
+
+    .pilar-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .pilar-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--terracota-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pilar-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracota-ladrillo);
+      margin-bottom: 0.5rem;
+    }
+
+    .pilar-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 0.65rem;
+    }
+
+    .pilar-card p {
+      font-size: 0.875rem;
+      color: var(--gris-medio);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ============================================================
+       MENÚ DESTACADO
+    ============================================================ */
+    #menu {
+      padding: 6rem 0;
+      background: var(--gris-suave);
+    }
+
+    .menu-header {
+      margin-bottom: 3rem;
+    }
+
+    .plato-card {
+      background: white;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-suave);
+      transition: var(--transition);
+      border: none;
+      height: 100%;
+    }
+
+    .plato-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .plato-img-area {
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plato-macro-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(251, 249, 246, 0.92);
+      backdrop-filter: blur(6px);
+      border-radius: 100px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--gris-carbon-fundido);
+      letter-spacing: 0.04em;
+    }
+
+    .plato-body {
+      padding: 1.25rem 1.35rem 1.5rem;
+    }
+
+    .plato-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracota-ladrillo);
+      margin-bottom: 0.4rem;
+    }
+
+    .plato-body h4 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+    }
+
+    .plato-body p {
+      font-size: 0.8rem;
+      color: var(--gris-medio);
+      line-height: 1.65;
+      margin-bottom: 1.15rem;
+    }
+
+    /* ============================================================
+       PLANES SEMANALES
+    ============================================================ */
+    #planes {
+      padding: 6rem 0;
+      background: var(--bg-tiza);
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-suave);
+      transition: var(--transition);
+      height: 100%;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card:hover {
+      border-color: var(--terracota-ladrillo);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .plan-card.plan-featured {
+      border-color: var(--gris-carbon-fundido);
+    }
+
+    .plan-badge-top {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: var(--terracota-ladrillo);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 0.25rem 0.7rem;
+    }
+
+    .plan-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+    .plan-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 0.25rem;
+    }
+
+    .plan-desc {
+      font-size: 0.82rem;
+      color: var(--gris-medio);
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-price {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--gris-carbon-fundido);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .plan-price sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+
+    .plan-price-note {
+      font-size: 0.75rem;
+      color: var(--gris-medio);
+      margin-bottom: 1.75rem;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      font-size: 0.85rem;
+      color: var(--gris-carbon-fundido);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--gris-suave);
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      font-weight: 700;
+      color: var(--terracota-ladrillo);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* Selector Retiro / Envío */
+    .delivery-selector {
+      background: var(--gris-suave);
+      border-radius: var(--radius-sm);
+      padding: 0.35rem;
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .delivery-option {
+      flex: 1;
+      text-align: center;
+      padding: 0.55rem 0.5rem;
+      border-radius: 9px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--gris-medio);
+      user-select: none;
+    }
+
+    .delivery-option.active {
+      background: white;
+      color: var(--gris-carbon-fundido);
+      box-shadow: 0 2px 10px rgba(44,46,49,0.1);
+    }
+
+    .delivery-option.active.pickup {
+      color: var(--terracota-ladrillo);
+    }
+
+    .discount-note {
+      font-size: 0.72rem;
+      color: var(--terracota-ladrillo);
+      font-weight: 600;
+      text-align: center;
+      min-height: 1.1rem;
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+    }
+
+    /* ============================================================
+       SECCIÓN CORPORATIVA
+    ============================================================ */
+    #corporativo {
+      padding: 6rem 0;
+      background: var(--gris-carbon-fundido);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #corporativo::before {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: -30%;
+      width: 55vw;
+      height: 55vw;
+      max-width: 600px;
+      max-height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 90, 50, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .corp-eyebrow {
+      color: var(--terracota-ladrillo);
+      margin-bottom: 0.75rem;
+    }
+
+    .corp-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--bg-tiza);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .corp-subtitle {
+      font-size: 0.95rem;
+      color: rgba(251, 249, 246, 0.6);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .corp-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .corp-stat-val {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--bg-tiza);
+      line-height: 1;
+    }
+
+    .corp-stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(251, 249, 246, 0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .btn-kipo-light {
+      background: var(--bg-tiza);
+      color: var(--gris-carbon-fundido);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-kipo-light:hover {
+      background: var(--terracota-ladrillo);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200, 90, 50, 0.4);
+    }
+
+    /* Divider line en corp */
+    .corp-divider {
+      width: 1px;
+      height: 100%;
+      background: rgba(251,249,246,0.08);
+    }
+
+    /* Corp form card */
+    .corp-form-card {
+      background: rgba(251, 249, 246, 0.05);
+      border: 1px solid rgba(251, 249, 246, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+    }
+
+    .corp-form-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--bg-tiza);
+      margin-bottom: 0.5rem;
+    }
+
+    .corp-form-card p {
+      font-size: 0.82rem;
+      color: rgba(251,249,246,0.5);
+      margin-bottom: 1.5rem;
+    }
+
+    .kipo-input {
+      background: rgba(251, 249, 246, 0.06);
+      border: 1px solid rgba(251, 249, 246, 0.15);
+      border-radius: var(--radius-sm);
+      color: var(--bg-tiza);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      padding: 0.7rem 1rem;
+      width: 100%;
+      margin-bottom: 0.85rem;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .kipo-input::placeholder { color: rgba(251,249,246,0.3); }
+
+    .kipo-input:focus {
+      border-color: var(--terracota-ladrillo);
+      background: rgba(251, 249, 246, 0.08);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--bg-tiza);
+      border-top: 1px solid rgba(44,46,49,0.08);
+      padding: 4rem 0 2.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--gris-medio);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-address {
+      font-size: 0.85rem;
+      color: var(--gris-carbon-fundido);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-address-note {
+      font-size: 0.78rem;
+      color: var(--gris-medio);
+    }
+
+    .footer-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { list-style: none; padding: 0; }
+
+    .footer-links li { margin-bottom: 0.55rem; }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--gris-medio);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--terracota-ladrillo); }
+
+    .footer-social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--gris-suave);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: var(--transition);
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-social-btn:hover {
+      background: var(--terracota-ladrillo);
+      transform: translateY(-2px);
+    }
+
+    .footer-promise {
+      background: var(--gris-suave);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .promise-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .promise-text {
+      font-size: 0.82rem;
+      color: var(--gris-carbon-fundido);
+      line-height: 1.55;
+    }
+
+    .promise-text strong {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(44,46,49,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: var(--gris-medio);
+      margin: 0;
+    }
+
+    /* ============================================================
+       PLATO IMG BACKGROUNDS (decorativos)
+    ============================================================ */
+    .plato-bg-1 { background: linear-gradient(145deg, #E5C9AD 0%, #C8977A 100%); }
+    .plato-bg-2 { background: linear-gradient(145deg, #D4B896 0%, #A8775A 100%); }
+    .plato-bg-3 { background: linear-gradient(145deg, #E8D4C0 0%, #C09070 100%); }
+    .plato-bg-4 { background: linear-gradient(145deg, #DDCBB5 0%, #B8886A 100%); }
+    .plato-bg-5 { background: linear-gradient(145deg, #E2C8AA 0%, #BF8060 100%); }
+    .plato-bg-6 { background: linear-gradient(145deg, #D8BFA0 0%, #B07055 100%); }
+
+    /* ============================================================
+       MODAL CORPORATIVO
+    ============================================================ */
+    .modal-content {
+      border-radius: var(--radius-lg) !important;
+      border: none !important;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: var(--gris-carbon-fundido);
+      border: none;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--bg-tiza);
+    }
+
+    .btn-close-light {
+      background: none;
+      border: none;
+      color: var(--bg-tiza);
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: var(--transition);
+    }
+
+    .btn-close-light:hover { opacity: 1; }
+
+    .modal-body { padding: 2rem 1.75rem; }
+
+    .modal-body label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris-carbon-fundido);
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .modal-input {
+      background: var(--gris-suave);
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      color: var(--gris-carbon-fundido);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      margin-bottom: 1.1rem;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .modal-input:focus {
+      border-color: var(--terracota-ladrillo);
+      background: white;
+    }
+
+    /* ============================================================
+       ANIMACIONES DE ENTRADA
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       RESPONSIVE ADJUSTMENTS
+    ============================================================ */
+    @media (max-width: 768px) {
+      .hero-kipo-logotype { line-height: 0.9; }
+      #hero::after { display: none; }
+      .corp-stats { gap: 1.25rem; }
+      .plan-card { margin-bottom: 1.5rem; }
+      .footer-bottom { justify-content: center; text-align: center; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-tiza); }
+    ::-webkit-scrollbar-thumb { background: var(--terracota-ladrillo); border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="kipo-nav" class="navbar navbar-expand-lg py-3">
+    <div class="container">
+      <a class="nav-logo" href="#">KIPO<span>.</span></a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span style="font-size:1.4rem;">☰</span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav align-items-lg-center gap-1 me-3 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#menu">Menú</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planes">Planes Semanales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#corporativo">Empresas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#footer">Ubicación</a></li>
+        </ul>
+        <a href="#planes" class="btn-pedir">Pedir Ahora</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section id="hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+
+        <!-- Columna izquierda: texto -->
+        <div class="col-lg-6 fade-up">
+          <div class="label-uppercase mb-3">🔥 Mendoza · Cocina real de olla</div>
+
+          <h1 class="hero-kipo-logotype">KIPO</h1>
+          <p class="hero-tagline">El sabor que te abraza.</p>
+
+          <p class="hero-subtitle">
+            Comida casera real, de olla y a fuego lento. Diseñada para resolver tus días en Mendoza sin perder el disfrute.
+          </p>
+
+          <div class="hero-badge-bar">
+            <span class="hero-badge"><span class="dot"></span>Sin conservantes</span>
+            <span class="hero-badge"><span class="dot"></span>Cocciones largas</span>
+            <span class="hero-badge"><span class="dot"></span>Envío a domicilio</span>
+            <span class="hero-badge"><span class="dot"></span>Cancelación libre</span>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#menu" class="btn-kipo-primary">[ Ver Menú de Hoy ]</a>
+            <a href="#planes" class="btn-kipo-outline">[ Planes Semanales ]</a>
+          </div>
+        </div>
+
+        <!-- Columna derecha: tarjeta visual -->
+        <div class="col-lg-5 offset-lg-1 hero-image-col fade-up" style="transition-delay: 0.15s;">
+          <div class="hero-food-card">
+            <div class="hero-food-img plato-bg-1">
+              <span style="position:relative; z-index:1; font-size: 4.5rem;">🥘</span>
+              <div class="hero-float-tag">⏱ Listo en 2 min</div>
+            </div>
+            <div class="hero-food-label">
+              <span class="plato-name">Pastel de Papas al Horno</span>
+              <span class="plato-price">Hoy disponible ✓</span>
+            </div>
+          </div>
+
+          <!-- Mini cards debajo -->
+          <div class="row g-2 mt-2">
+            <div class="col-6">
+              <div style="background:white; border-radius:var(--radius-sm); padding:0.9rem 1rem; box-shadow:var(--shadow-suave); display:flex; align-items:center; gap:0.65rem;">
+                <span style="font-size:1.3rem;">🧊</span>
+                <div>
+                  <div style="font-size:0.7rem; font-weight:700; color:var(--terracota-ladrillo);">PACKS FREEZER</div>
+                  <div style="font-size:0.8rem; color:var(--gris-carbon-fundido); font-weight:600;">5 o 10 comidas</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:white; border-radius:var(--radius-sm); padding:0.9rem 1rem; box-shadow:var(--shadow-suave); display:flex; align-items:center; gap:0.65rem;">
+                <span style="font-size:1.3rem;">🏢</span>
+                <div>
+                  <div style="font-size:0.7rem; font-weight:700; color:var(--terracota-ladrillo);">CORPORATIVO</div>
+                  <div style="font-size:0.8rem; color:var(--gris-carbon-fundido); font-weight:600;">Equipo completo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PILARES — ¿Cómo funciona KIPO?
+  ============================================================ -->
+  <section id="pilares">
+    <div class="container">
+      <div class="pilares-eyebrow">
+        <span class="label-uppercase">¿Cómo funciona?</span>
+      </div>
+      <h2 class="pilares-title">Tres formas de disfrutar<br><em>la cocina de KIPO</em></h2>
+
+      <div class="row g-4">
+
+        <!-- Pilar 1 -->
+        <div class="col-md-4 fade-up">
+          <div class="pilar-card">
+            <div class="pilar-icon">🏪</div>
+            <div class="pilar-num">01 — Grab & Go</div>
+            <h3>Paso por el Local</h3>
+            <p>
+              Arístides 394, Quinta Sección. Entrás, elegís de la heladera y te llevás calor de hogar en 2 minutos. Sin esperas, sin vueltas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="col-md-4 fade-up" style="transition-delay:0.12s;">
+          <div class="pilar-card">
+            <div class="pilar-icon">📦</div>
+            <div class="pilar-num">02 — Suscripción</div>
+            <h3>Packs Semanales</h3>
+            <p>
+              Viandas caseras congeladas o al vacío para llenar tu freezer y resolver la semana. Sin contratos: cancelás cuando querés, en un clic.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="col-md-4 fade-up" style="transition-delay:0.24s;">
+          <div class="pilar-card">
+            <div class="pilar-icon">🏢</div>
+            <div class="pilar-num">03 — B2B</div>
+            <h3>KIPO Corporativo</h3>
+            <p>
+              Almuerzos premium para oficinas, startups y clínicas. Entrega programada, facturación mensual y menú rotativo para que el equipo coma bien.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MENÚ DESTACADO
+  ============================================================ -->
+  <section id="menu">
+    <div class="container">
+
+      <div class="menu-header row align-items-end">
+        <div class="col-lg-7">
+          <div class="label-uppercase mb-2 fade-up">Antojo Visual</div>
+          <h2 class="serif fade-up" style="font-size: clamp(2rem, 5vw, 3rem); line-height:1.1; margin-bottom:0;">
+            El menú de<br><em>esta semana</em>
+          </h2>
+        </div>
+        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0 fade-up">
+          <a href="#planes" class="btn-kipo-outline">Ver todos los platos →</a>
+        </div>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Plato 1 -->
+        <div class="col-sm-6 col-lg-4 fade-up">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-1">
+              <span>🥘</span>
+              <span class="plato-macro-badge">420 kcal · P28g · C35g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">⭐ El más pedido</div>
+              <h4>Pastel de Papas Gourmet al Horno de Barro</h4>
+              <p>Relleno de carne cortada a cuchillo, aceitunas y huevo, cubierto con puré dorado. Textura de abuela, presentación de chef.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plato 2 -->
+        <div class="col-sm-6 col-lg-4 fade-up" style="transition-delay:0.1s;">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-2">
+              <span>🍲</span>
+              <span class="plato-macro-badge">510 kcal · P36g · C22g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">🔥 Cocción lenta</div>
+              <h4>Estofado de Ternera a Fuego Lento</h4>
+              <p>Corte de paleta braseado por 6 horas, zanahoria, papa y vino tinto mendocino. Caldo profundo de verdad.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plato 3 -->
+        <div class="col-sm-6 col-lg-4 fade-up" style="transition-delay:0.2s;">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-3">
+              <span>🫙</span>
+              <span class="plato-macro-badge">380 kcal · P18g · C42g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">🌿 Vegetariano</div>
+              <h4>Canelones de Espinaca y Ricota Casera</h4>
+              <p>Pasta fresca rellena con ricota artesanal y espinaca salteada. Gratin de queso gratinado con salsa blanca liviana.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plato 4 -->
+        <div class="col-sm-6 col-lg-4 fade-up" style="transition-delay:0.05s;">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-4">
+              <span>🍛</span>
+              <span class="plato-macro-badge">460 kcal · P30g · C40g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">🏠 Receta familiar</div>
+              <h4>Arroz con Leche Abuelo Mendocino</h4>
+              <p>Postre cremoso con canela en rama y piel de limón. Textura untuosa que cierra cualquier almuerzo con una sonrisa.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plato 5 -->
+        <div class="col-sm-6 col-lg-4 fade-up" style="transition-delay:0.15s;">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-5">
+              <span>🥩</span>
+              <span class="plato-macro-badge">540 kcal · P42g · C12g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">💪 Alto en proteína</div>
+              <h4>Matambre Relleno Casero con Ensalada Tibia</h4>
+              <p>Matambre de cerdo relleno de morrón asado, huevo y perejil. Acompañado de ensalada de papa y zanahoria al vapor.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plato 6 -->
+        <div class="col-sm-6 col-lg-4 fade-up" style="transition-delay:0.25s;">
+          <div class="plato-card card">
+            <div class="plato-img-area plato-bg-6">
+              <span>🍜</span>
+              <span class="plato-macro-badge">390 kcal · P24g · C38g</span>
+            </div>
+            <div class="plato-body">
+              <div class="plato-tag">☁️ Liviano y nutritivo</div>
+              <h4>Sopa de Pollo con Fideos y Vegetales del Día</h4>
+              <p>Caldo casero de pollo con fideos finitos, zanahoria, apio y perejil fresco. El remedio natural para cualquier día.</p>
+              <button class="btn-kipo-terracota w-100">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SELECTOR DE PLANES SEMANALES
+  ============================================================ -->
+  <section id="planes">
+    <div class="container">
+
+      <div class="text-center mb-5 fade-up">
+        <div class="label-uppercase mb-2">Suscripción Flexible</div>
+        <h2 class="serif" style="font-size: clamp(2rem, 5vw, 3rem); line-height:1.1; margin-bottom:0.75rem;">
+          Elegí tu plan<br><em>semanal KIPO</em>
+        </h2>
+        <p style="font-size:0.9rem; color:var(--gris-medio); max-width:450px; margin:0 auto;">
+          Sin contratos ni letra chica. Pausás, cambiás o cancelás cuando quieras desde tu perfil — en un solo clic.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <!-- Plan 5 comidas -->
+        <div class="col-md-5 fade-up">
+          <div class="plan-card h-100">
+            <div class="plan-icon">🥘</div>
+            <h3>Pack 5 Comidas</h3>
+            <p class="plan-desc">Perfecto para arrancar la semana con menos estrés.</p>
+
+            <!-- Selector retiro / envío -->
+            <div class="delivery-selector" id="selector-5">
+              <div class="delivery-option active pickup" data-plan="5" data-mode="retiro" onclick="selectDelivery(this)">
+                🏪 Retiro en tienda
+              </div>
+              <div class="delivery-option" data-plan="5" data-mode="envio" onclick="selectDelivery(this)">
+                🚚 Envío a domicilio
+              </div>
+            </div>
+            <div class="discount-note" id="note-5">✨ ¡10% de descuento por retiro en Arístides 394!</div>
+
+            <div class="plan-price" id="price-5"><sup>$</sup>18.500</div>
+            <p class="plan-price-note">por semana · facturación semanal</p>
+
+            <ul class="plan-features">
+              <li>5 platos caseros de temporada</li>
+              <li>Congelados o al vacío al elegir</li>
+              <li>Calorías y macros en cada envase</li>
+              <li>Rotación de menú semanal</li>
+              <li>Cancelación con 1 clic</li>
+            </ul>
+
+            <button class="btn-kipo-primary w-100" onclick="handlePlanClick('5 Comidas')">Empezar con Pack 5 →</button>
+          </div>
+        </div>
+
+        <!-- Plan 10 comidas -->
+        <div class="col-md-5 fade-up" style="transition-delay:0.12s;">
+          <div class="plan-card plan-featured h-100">
+            <div class="plan-badge-top">Más popular</div>
+            <div class="plan-icon">🍲</div>
+            <h3>Pack 10 Comidas</h3>
+            <p class="plan-desc">La semana completa resuelta. El favorito de las familias.</p>
+
+            <!-- Selector retiro / envío -->
+            <div class="delivery-selector" id="selector-10">
+              <div class="delivery-option active pickup" data-plan="10" data-mode="retiro" onclick="selectDelivery(this)">
+                🏪 Retiro en tienda
+              </div>
+              <div class="delivery-option" data-plan="10" data-mode="envio" onclick="selectDelivery(this)">
+                🚚 Envío a domicilio
+              </div>
+            </div>
+            <div class="discount-note" id="note-10">✨ ¡10% de descuento por retiro en Arístides 394!</div>
+
+            <div class="plan-price" id="price-10"><sup>$</sup>33.000</div>
+            <p class="plan-price-note">por semana · facturación semanal</p>
+
+            <ul class="plan-features">
+              <li>10 platos caseros de temporada</li>
+              <li>Congelados o al vacío al elegir</li>
+              <li>Calorías y macros en cada envase</li>
+              <li>Rotación de menú semanal</li>
+              <li>Cancelación con 1 clic</li>
+              <li>Plato sorpresa de regalo cada semana</li>
+            </ul>
+
+            <button class="btn-kipo-primary w-100" onclick="handlePlanClick('10 Comidas')">Empezar con Pack 10 →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Nota pie de sección -->
+      <p class="text-center mt-4 fade-up" style="font-size:0.78rem; color:var(--gris-medio);">
+        🔒 Pago seguro · 📦 Embalaje ecológico · ♻️ Cancelación en 1 clic · 📍 Arístides Villanueva 394, Mendoza
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN CORPORATIVA
+  ============================================================ -->
+  <section id="corporativo">
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+
+        <!-- Texto left -->
+        <div class="col-lg-6 fade-up">
+          <div class="corp-eyebrow label-uppercase">KIPO para Empresas</div>
+          <h2 class="corp-title">
+            El equipo que come<br>bien, <em>trabaja mejor.</em>
+          </h2>
+          <p class="corp-subtitle">
+            Soluciones de almuerzo premium para oficinas, startups y clínicas mendocinas. Menú rotativo, entrega programada, facturación mensual sin complicaciones para Recursos Humanos.
+          </p>
+
+          <div class="corp-stats">
+            <div>
+              <div class="corp-stat-val">+40</div>
+              <div class="corp-stat-label">Empresas activas</div>
+            </div>
+            <div>
+              <div class="corp-stat-val">98%</div>
+              <div class="corp-stat-label">Satisfacción del equipo</div>
+            </div>
+            <div>
+              <div class="corp-stat-val">0</div>
+              <div class="corp-stat-label">Contratos rígidos</div>
+            </div>
+          </div>
+
+          <button class="btn-kipo-light" data-bs-toggle="modal" data-bs-target="#corpModal">
+            Cotizá para tu empresa →
+          </button>
+        </div>
+
+        <!-- Formulario inline -->
+        <div class="col-lg-5 offset-lg-1 fade-up" style="transition-delay:0.15s;">
+          <div class="corp-form-card">
+            <h4>Contacto rápido B2B</h4>
+            <p>Te respondemos en menos de 2 horas hábiles.</p>
+
+            <input type="text" class="kipo-input" placeholder="Empresa / Organización" />
+            <input type="text" class="kipo-input" placeholder="Tu nombre y cargo" />
+            <input type="email" class="kipo-input" placeholder="Email corporativo" />
+            <input type="number" class="kipo-input" placeholder="¿Cuántas personas almuerzan?" />
+            <button class="btn-kipo-light w-100" onclick="handleCorpSubmit()">
+              Solicitar propuesta →
+            </button>
+
+            <p style="font-size:0.7rem; color:rgba(251,249,246,0.3); text-align:center; margin-top:0.85rem; margin-bottom:0;">
+              Sin compromiso · Propuesta en 24hs · Sin spam
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
+    <div class="container">
+
+      <div class="row g-5">
+
+        <!-- Brand col -->
+        <div class="col-lg-4">
+          <div class="footer-logo">KIPO<span style="color:var(--terracota-ladrillo);">.</span></div>
+          <p class="footer-tagline">Comida casera real, de olla y a fuego lento.</p>
+
+          <div class="footer-address">📍 Arístides Villanueva 394</div>
+          <div class="footer-address-note">Quinta Sección, Mendoza Capital, Argentina</div>
+
+          <div class="mt-3" style="font-size:0.82rem; color:var(--gris-medio);">
+            Lun–Vie: 10:00 – 20:00<br>
+            Sáb: 10:00 – 15:00
+          </div>
+
+          <div class="mt-3">
+            <a href="#" class="footer-social-btn" aria-label="Instagram">📸</a>
+            <a href="#" class="footer-social-btn" aria-label="WhatsApp">💬</a>
+            <a href="#" class="footer-social-btn" aria-label="Facebook">📘</a>
+            <a href="#" class="footer-social-btn" aria-label="TikTok">🎵</a>
+          </div>
+        </div>
+
+        <!-- Links col -->
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Menú</div>
+          <ul class="footer-links">
+            <li><a href="#menu">Platos de hoy</a></li>
+            <li><a href="#planes">Packs semanales</a></li>
+            <li><a href="#">Menú corporativo</a></li>
+            <li><a href="#">Novedades</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Empresa</div>
+          <ul class="footer-links">
+            <li><a href="#">Nuestra historia</a></li>
+            <li><a href="#">Ingredientes</a></li>
+            <li><a href="#corporativo">KIPO B2B</a></li>
+            <li><a href="#">Prensa</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Ayuda</div>
+          <ul class="footer-links">
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Cancelar suscripción</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Términos de uso</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Promesa de transparencia -->
+      <div class="footer-promise fade-up">
+        <div class="promise-icon">🔓</div>
+        <div class="promise-text">
+          <strong>Cancelación libre, siempre.</strong>
+          Gestionás tu suscripción directamente desde tu perfil con un solo clic. Sin contratos rígidos, sin llamadas, sin complicaciones. Tu libertad es parte del servicio.
+        </div>
+      </div>
+
+      <!-- Footer bottom -->
+      <div class="footer-bottom">
+        <p>© 2025 KIPO Gastronomía · Mendoza, Argentina · Todos los derechos reservados</p>
+        <p>Hecho con 🔥 y cocciones lentas en Mendoza</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       MODAL CORPORATIVO
+  ============================================================ -->
+  <div class="modal fade" id="corpModal" tabindex="-1" aria-labelledby="corpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title" id="corpModalLabel">Cotización para Empresas</h5>
+          <button type="button" class="btn-close-light" data-bs-dismiss="modal" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.85rem; color:var(--gris-medio); margin-bottom:1.5rem;">
+            Completá el formulario y un asesor KIPO te contacta en menos de 2 horas hábiles con una propuesta personalizada.
+          </p>
+
+          <label>Empresa / Organización</label>
+          <input type="text" class="modal-input" placeholder="Ej: Startup MZA S.A." />
+
+          <label>Tu nombre y cargo</label>
+          <input type="text" class="modal-input" placeholder="Ej: María González, Gerente RRHH" />
+
+          <label>Email corporativo</label>
+          <input type="email" class="modal-input" placeholder="maria@empresa.com" />
+
+          <label>Teléfono / WhatsApp</label>
+          <input type="tel" class="modal-input" placeholder="+54 261 xxx-xxxx" />
+
+          <label>¿Cuántas personas almuerzan?</label>
+          <input type="number" class="modal-input" placeholder="Ej: 15" />
+
+          <label>Comentarios o necesidades especiales</label>
+          <textarea class="modal-input" rows="3" placeholder="Restricciones alimentarias, frecuencia, horarios preferidos..."></textarea>
+
+          <button class="btn-kipo-primary w-100 mt-1" onclick="handleModalSubmit()">
+            Enviar solicitud de propuesta →
+          </button>
+
+          <p style="font-size:0.7rem; color:var(--gris-medio); text-align:center; margin-top:0.85rem; margin-bottom:0;">
+            Sin compromiso · Propuesta personalizada en 24hs · Tu información es privada
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       SELECTOR RETIRO / ENVÍO
+    ============================================================ */
+    const PRICES = {
+      '5': { retiro: '18.500', envio: '20.500' },
+      '10': { retiro: '33.000', envio: '36.500' }
+    };
+
+    function selectDelivery(el) {
+      const plan = el.dataset.plan;
+      const mode = el.dataset.mode;
+      const selector = document.getElementById('selector-' + plan);
+
+      // Toggle active state
+      selector.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.remove('active', 'pickup');
+      });
+      el.classList.add('active');
+      if (mode === 'retiro') el.classList.add('pickup');
+
+      // Update price
+      const priceEl = document.getElementById('price-' + plan);
+      priceEl.innerHTML = '<sup>$</sup>' + PRICES[plan][mode];
+
+      // Update discount note
+      const noteEl = document.getElementById('note-' + plan);
+      if (mode === 'retiro') {
+        noteEl.textContent = '✨ ¡10% de descuento por retiro en Arístides 394!';
+        noteEl.style.opacity = '1';
+      } else {
+        noteEl.textContent = '🚚 Envío a tu dirección en Mendoza Capital';
+        noteEl.style.opacity = '0.75';
+      }
+    }
+
+    /* ============================================================
+       CTA HANDLERS (simulados)
+    ============================================================ */
+    function handlePlanClick(planName) {
+      alert('¡Genial! Estás eligiendo el Pack ' + planName + '.\n\nEn breve te redirigimos al checkout seguro de KIPO. 🛒');
+    }
+
+    function handleCorpSubmit() {
+      alert('¡Gracias! Recibimos tu solicitud corporativa.\n\nUn asesor KIPO te contactará en las próximas 2 horas hábiles. 🤝');
+    }
+
+    function handleModalSubmit() {
+      const modal = bootstrap.Modal.getInstance(document.getElementById('corpModal'));
+      if (modal) modal.hide();
+      setTimeout(() => {
+        alert('¡Solicitud enviada con éxito! 🎉\n\nNuestro equipo comercial te escribe en menos de 2 horas hábiles con una propuesta personalizada.');
+      }, 300);
+    }
+
+    /* ============================================================
+       ANIMACIONES SCROLL (IntersectionObserver)
+    ============================================================ */
+    const fadeEls = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ============================================================
+       NAVBAR SHADOW ON SCROLL
+    ============================================================ */
+    const nav = document.getElementById('kipo-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.boxShadow = '0 2px 20px rgba(44,46,49,0.09)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
